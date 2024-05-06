@@ -1,103 +1,180 @@
-<h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Saravanan N</h3>
-<h3>Register Number/Staff Id: TSML006</h3>
+<h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1>
+<h3>Name: NAVEEN S</h3>
+<h3>Register Number: 212222110030 </h3>
+<H3>Aim:</H3>
+<p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
+<h3>Theory:</h3>
+<p>Breadth-First Traversal (or Search) for a graph is like the Breadth-First Traversal of a tree.
+The only catch here is that, unlike trees, graphs may contain cycles so that we may come to the same node again. To avoid processing a node more than once, we divide the vertices into two categories:
+<ol><li>Visited</li>
+<li>Not Visited</li></ol>
+</p>
+<p>A Boolean visited array is used to mark the visited vertices. For simplicity, it is assumed that all vertices are reachable from the starting vertex. BFS uses a queue data structure for traversal.</p>
+<p><strong>How does BFS work?</strong><br>
+  Starting from the root, all the nodes at a particular level are visited first, and then the next level nodes are traversed until all the nodes are visited.
+To do this, a queue is used. All the adjacent unvisited nodes of the current level are pushed into the queue, and the current-level nodes are marked visited and popped from the queue.
+Illustration:
+Let us understand the working of the algorithm with the help of the following example.
+Step1: Initially queue and visited arrays are empty.
+</p>
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8acdebf8-ecc2-4d10-a208-45cce441f059)
 
 
+Queue and visited arrays are empty initially.
+Step2: Push node 0 into queue and mark it visited.
 
-## AIM:
-
-To develop a PEAS description for the given AI problem and implement an AI agent for a vacuum cleaner.
-
-## Theory:
-### Vacuum Cleaner Agent:
-This agent operates within a confined environment consisting of multiple rooms (four rooms in this case). The objective of the agent is to navigate through these rooms, detect and clean any dirt present. The agent's performance is determined by the efficiency with which it cleans the rooms. Each movement and cleaning action affects its performance. The environment comprises rooms with potential dirt spots, and the agent must use sensors to detect dirt and actuators to perform cleaning actions.
-
-### PEAS DESCRIPTION:
-
-|AgentType|	Performance	|Environment|	Actuators|	Sensors|
-|--------|--------|	----------	|----------|	-----|	
-|Vacuum Cleaner Agent	|Cleaning efficiency|	Rooms with potential dirt spots	|Vacuuming	|Cleaning sensors|
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/0e9ce012-8e1f-43d7-b7b9-c0fb19fe0c3f)
 
 
+Push node 0 into queue and mark it visited.
+Step 3: Remove node 0 from the front of queue and visit the unvisited neighbours and push them into queue.
 
-## ALGORITHM:
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/67d8fa3b-ce9e-46c2-9dd7-089e204e667a)
 
-#### STEP 1: Identifying the input:
-Detection of dirt spots in each room.
+Step 4: Remove node 1 from the front of queue and visit the unvisited neighbours and push them into queue.
 
-#### STEP 2: Identifying the output:
-Perform cleaning actions in detected dirt spots.
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/b0cf0fde-8a86-41cb-a054-36875ac24ab0)
 
-#### STEP 3: Developing the PEAS description:
-PEAS description is constructed based on the performance, environment, actuators, and sensors of the agent.
+Step 5: Remove node 2 from the front of queue and visit the unvisited neighbours and push them into queue.
 
-#### STEP 4: Implementing the AI agent:
-Clean dirt spots in each room using vacuuming actions.
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8968a163-6b3a-4f7e-8ad4-bbf24f326b9b)
 
-#### STEP 5: Measure the performance parameters:
-Performance is determined by the percentage of cleaned spots in the rooms. Each cleaning action contributes positively to performance, while movement may affect performance negatively.
+Step 6: Remove node 3 from the front of queue and visit the unvisited neighbours and push them into queue. 
+As we can see that every neighbours of node 3 is visited, so move to the next node that are in the front of the queue.
 
-## CODE:
-``` PYTHON
-# Developed By : NAVEEN S
-# Reg No : 212222110030
-import random
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/7a1c1b16-ea69-497f-a099-8440200f6dc0)
 
-class VacuumCleaner:
-    def __init__(self):
-        self.room = [
-            [1, 1, 1, 1],
-            [1, 1, 1, 1],
-            [1, 1, 1, 1],
-            [1, 1, 1, 1],
-        ]
+Steps 7: Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue. 
+As we can see that every neighbours of node 4 are visited, so move to the next node that is in the front of the queue.
 
-    def display_room(self):
-        print("Room Status:")
-        for row in self.room:
-            print(row)
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8e16ffa3-c3d6-4774-822b-6eb84adedad9)
 
-    def dirty_room(self):
-        print("All the rooms are dirty")
+Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue.
+Now, Queue becomes empty, So, terminate these process of iteration.
 
-    def random_dirt(self):
-        for x in range(4):
-            for y in range(4):
-                self.room[x][y] = random.choice([0, 1])
 
-    def clean_room(self):
-        print("Before cleaning the room, detecting random dirt...")
-        self.random_dirt()
-        self.display_room()
-        dirt_count = 0
-        for x in range(4):
-            for y in range(4):
-                if self.room[x][y] == 1:
-                    print("Vacuuming at location:", x, y)
-                    self.room[x][y] = 0
-                    print("Cleaned at location:", x, y)
-                    dirt_count += 1
-        print("Room is clean now.")
-        self.display_room()
-        performance = self.calculate_performance(dirt_count)
-        print("Performance:", performance, "%")
+<hr>
+<h2>Algorithm:</h2>
+<hr>
+<ol>
+  <li>Construct a Graph with Nodes and Edges</li>
+ <li>Breadth First Uses Queue and iterates through the Queue for Traversal.</li>
+  <li>Insert a Start Node into the Queue.</li>
+<li>Find its Successors Or neighbors and Check whether the node is visited or not.</li>
+<li>If Not Visited, add it to the Queue. Else Continue.</li>
+<li>Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes.</li>
 
-    def calculate_performance(self, cleaned_count):
-        total_spots = 16
-        performance = (1 - (cleaned_count / total_spots)) * 100
-        return performance
+</ol>
 
-if __name__ == "__main__":
-    vacuum = VacuumCleaner()
-    vacuum.dirty_room()
-    vacuum.clean_room()
+## Program:
 
 ```
-## OUTPUT:
-![image](https://github.com/MukeshVelmurugan/19AI405ExpNo1/assets/118707363/10548efe-b9d8-4e92-b8b2-ac2cf2354882)
+from collections import deque
+from collections import defaultdict
 
-### RESULT:
-Thus the Developing AI Agent with PEAS Description was implemented using python programming.
+def bfs(graph,start,visited,path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+    while len(queue) != 0:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if visited[neighbour] == False:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+    return path
+
+graph = defaultdict(list)
+v,e = map(int,input().split())
+for i in range(e):
+    u,v = map(str,input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+
+start = 'A'
+path = []
+visited = defaultdict(bool)
+traversedpath = bfs(graph,start,visited,path)
+print(traversedpath)
+
+```
+
+<hr>
+<h3>Sample Input</h3>
+<hr>
+7 9 <BR>
+A B <BR>
+A C <BR>
+A F <BR>
+C E <BR>
+C F <BR>
+C D <BR>
+D E <BR>
+D G <BR>
+G F <BR>
+<hr>
+<h3>Sample Output</h3>
+<hr>
+['A', 'B', 'C', 'F', 'E', 'D', 'G']
+
+<hr>
+
+## Program:
+```
+from collections import deque
+from collections import defaultdict
+
+def bfs(graph,start,visited,path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+    while len(queue) != 0:
+        tmpnode = queue.popleft()
+        for neighbour in graph[tmpnode]:
+            if visited[neighbour] == False:
+                path.append(neighbour)
+                queue.append(neighbour)
+                visited[neighbour] = True
+    return path
+
+graph = defaultdict(list)
+v,e = map(int,input().split())
+for i in range(e):
+    u,v = map(str,input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+
+start = '0'
+path = []
+visited = defaultdict(bool)
+traversedpath = bfs(graph,start,visited,path)
+print(traversedpath)
+
+```
+
+<hr>
+<h3>Sample Input</h3>
+<hr>
+5 6 <BR>
+0 1 <BR>
+0 2 <BR>
+1 2 <BR>
+1 3 <BR>
+2 4 <BR>
+3 4 <BR>
+<hr>
+<h3>Sample Output</h3>
+<hr>
+['0', '1', '2', '3', '4']
+<hr>
+<h3>Result:</h3>
+<hr>
+<p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
+
 
 
 
